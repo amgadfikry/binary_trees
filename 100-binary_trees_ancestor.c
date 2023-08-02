@@ -52,10 +52,6 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 			if (ptr1 == ptr2)
 				return ((binary_tree_t *)ptr1);
 		}
-		if (ptr1->parent == NULL)
-			return ((binary_tree_t *)ptr1);
-		if (ptr2->parent == NULL)
-			return ((binary_tree_t *)ptr2);
 	}
 	else if (dep1 < dep2)
 	{
