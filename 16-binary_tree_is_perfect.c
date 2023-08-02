@@ -80,7 +80,7 @@ int is_full(const binary_tree_t *tree)
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	if (tree == NULL || (tree->right == NULL && tree->left == NULL))
+	if (tree == NULL)
 		return (0);
 
 	if (is_full(tree))
