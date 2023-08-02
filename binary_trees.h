@@ -30,6 +30,18 @@ typedef struct binary_tree_s avl_t;
 /*Max Binary Heap type def*/
 typedef struct binary_tree_s heap_t;
 
+/**
+ * struct queue_t - queue of level rder traversal
+ * @p: pointer of node
+ * @next: Pointer to the next node
+ */
+struct queue_t
+{
+	const binary_tree_t *p;
+	struct queue_t *next;
+};
+typedef struct queue_t queue;
+
 /*prototype of function that print binary tree*/
 void binary_tree_print(const binary_tree_t *);
 
