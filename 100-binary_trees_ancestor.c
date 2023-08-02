@@ -24,6 +24,33 @@ size_t b_depth(const binary_tree_t *tree)
 	return (count);
 }
 
+
+/**
+ * diff_dep - check if common ancestor with nodes not on
+ * same depth
+ * @l_dep: large depth
+ * @s_dep: small depth
+ * @l_ptr: pointer of node long depth
+ * @s_ptr: pointer of node small depth
+ * Return: pointer to common ancestor or NULL
+ */
+
+binary_tree_t *diff_dep(int l_dep, int s_dep, const binary_tree_t *l_ptr,
+			const binary_tree_t *s_ptr)
+{
+	while (l_ptr)
+	{
+		if (l_ptr == s_ptr)
+			return ((binary_tree_t *)s_ptr);
+		l_ptr = l_ptr->parent;
+		if (l_dep > s_dep)
+			l_dep--;
+		else
+			s_ptr = s_ptr->parent;
+	}
+	return (NULL);
+}
+
 /**
  * binary_trees_ancestor - find lowest common ancestor of two nodes
  * @first: pointer to first node
@@ -35,7 +62,7 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 				     const binary_tree_t *second)
 {
 	const binary_tree_t *ptr1, *ptr2;
-	int dep1, dep2, temp;
+	int dep1, dep2;
 
 	if (first == NULL || second == NULL)
 		return (NULL);
@@ -52,34 +79,10 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 			ptr1 = ptr1->parent;
 			ptr2 = ptr2->parent;
 		}
+		return (NULL);
 	}
 	else if (dep1 < dep2)
-	{
-		temp = dep2;
-		while (ptr2)
-		{
-			if (ptr2 == ptr1)
-				return ((binary_tree_t *)ptr1);
-			ptr2 = ptr2->parent;
-			if (temp > dep1)
-				temp--;
-			else
-				ptr1 = ptr1->parent;
-		}
-	}
+		return (diff_dep(dep2, dep1, ptr2, ptr1));
 	else
-	{
-		temp = dep1;
-                while (ptr1)
-                {
-                        if (ptr2 == ptr1)
-                                return ((binary_tree_t *)ptr1);
-                        ptr1 = ptr1->parent;
-                        if (temp > dep2)
-                                temp--;
-                        else
-                                ptr2 = ptr2->parent;
-                }
-	}
-	return (NULL);
+		return (diff_dep(dep1, dep2, ptr1, ptr2));
 }
