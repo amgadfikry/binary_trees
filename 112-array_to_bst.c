@@ -18,6 +18,7 @@ bst_t *array_to_bst(int *array, size_t size)
 	tree = malloc(sizeof(bst_t));
 	if (tree == NULL)
 		return (NULL);
+	tree = NULL;
 
 	root = bst_insert(&tree, array[0]);
 	for (i = 1; i < size; i++)
