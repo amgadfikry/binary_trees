@@ -72,6 +72,8 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 
 	if (tree == NULL)
 		return (0);
+	if (tree->right == NULL && tree->left == NULL)
+		return (1);
 
 	size = b_size(tree);
 	arr = malloc(sizeof(int) * size);
@@ -85,7 +87,7 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 
 	for (i = 0; i < size - 1; i++)
 	{
-		if (arr[i] > arr[i + 1])
+		if (arr[i] >= arr[i + 1])
 		{
 			free(arr);
 			return (0);
